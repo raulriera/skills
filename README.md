@@ -16,5 +16,6 @@ ln -s "$PWD/<skill-name>" ~/.claude/skills/<skill-name>
 
 | Skill | What it does |
 |-------|--------------|
+| [`logging-best-practices`](logging-best-practices) | The call-site contract for Swift logging with [Logbook](https://github.com/raulriera/Logbook) — constant messages, metadata keys that name their value so redaction can match them, level semantics, bootstrap/flush wiring, and keeping log files out of tests. |
 | [`reclaim-dev-disk-space`](reclaim-dev-disk-space) | Diagnose and safely reclaim disk space on a macOS dev machine (the XcodeBuildMCP cache leak, DerivedData, simulator runtimes) and audit/remove git worktrees — investigate → tiered approval → dry-run → verify, so nothing irreplaceable is deleted. |
 | [`reflect`](reflect) | `/reflect <topic>` — write a blameless reflection about a situation that went off track this session into `.claude/reflections/`, so the same mistake isn't repeated. |
