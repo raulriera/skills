@@ -1,0 +1,22 @@
+{
+  "name": "raulriera",
+  "description": "Personal Claude Code skills by Raul Riera.",
+  "owner": {
+    "name": "Raul Riera",
+    "url": "https://github.com/raulriera"
+  },
+  "plugins": [
+    {
+      "name": "skills",
+      "source": "./",
+      "description": "Every skill in this repository. Each top-level directory with a SKILL.md is picked up automatically, so new skills ship without editing this file.",
+      "author": {
+        "name": "Raul Riera"
+      },
+      "homepage": "https://github.com/raulriera/skills",
+      "repository": "https://github.com/raulriera/skills",
+      "license": "MIT",
+      "skills": ["./"]
+    }
+  ]
+}

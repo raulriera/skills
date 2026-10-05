@@ -6,11 +6,26 @@ Each top-level directory is a self-contained skill (a `SKILL.md` plus any bundle
 
 ## Install
 
-Symlink a skill into your personal skills directory so Claude Code discovers it:
+This repo is a Claude Code plugin marketplace. Add it once, then install the `skills` plugin, which bundles every skill below:
+
+```bash
+claude plugin marketplace add raulriera/skills
+claude plugin install skills@raulriera
+```
+
+Or from inside a session: `/plugin marketplace add raulriera/skills`, then `/plugin install skills@raulriera`.
+
+Skills are namespaced under the plugin, so `reflect` runs as `/skills:reflect`. To pick up new and updated skills, run `claude plugin marketplace update raulriera`, then `claude plugin update skills@raulriera`.
+
+To use a single skill without the plugin, symlink it into your personal skills directory instead:
 
 ```bash
 ln -s "$PWD/<skill-name>" ~/.claude/skills/<skill-name>
 ```
+
+## Adding a skill
+
+Create a top-level directory containing a `SKILL.md` and add a row to the table below. The plugin scans the repo root for skill folders (see [`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json)), so the manifest doesn't need editing. Run `claude plugin validate .` before pushing.
 
 ## Skills
 
