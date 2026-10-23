@@ -1,5 +1,5 @@
 ---
-name: xcuitest-resilience
+name: xcuitest-best-practices
 description: 'Use when writing, reviewing, or debugging XCUITest UI tests for iOS apps. Makes tests idempotent, free of manual setup, and portable between local runs and Xcode Cloud. Covers app-state reset before service construction, page objects, readiness waits, system alerts and permissions, custom gestures, relaunch and persistence checks, secrets, and flaky-test diagnosis. Symptoms: a test passes alone but fails in a full run or on CI, taps miss, waits time out, the app starts in the wrong state.'
 license: MIT
 metadata:
@@ -7,7 +7,7 @@ metadata:
   version: "1.0"
 ---
 
-# XCUITest Resilience
+# XCUITest Best Practices
 
 ## Overview
 
