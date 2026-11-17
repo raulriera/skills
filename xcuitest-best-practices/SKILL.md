@@ -62,7 +62,7 @@ this skill.
 
 ## Routing map
 
-- Reset hooks, prepared start states, launch and relaunch, remote state, fixtures → `references/state-and-idempotency.md`
+- Reset hooks, turning off animations, prepared start states, launch and relaunch, remote state, fixtures → `references/state-and-idempotency.md`
 - Readiness predicates, scrolling, moving content, gestures → `references/waiting-and-interaction.md`
 - The shared app driver, one page per feature, test layout and naming → `references/page-objects.md`
 - SpringBoard alerts, permission resets, share sheets, backgrounding, URLs → `references/system-ui.md`
@@ -95,6 +95,7 @@ this skill.
 - No `sleep`, no generic alert dismissal, no retry of a committed action.
 - Queries use user-facing text where it is unique and stable.
 - Relaunches that check persistence omit the reset flag.
+- Every launch turns off animations with a Debug simulator flag.
 - Remote state that a test creates is unique to the run or removed by the test.
 - Test code uses no `Process`, `simctl`, or host paths; secrets come from configuration.
 - One page per feature owns its queries; the driver holds no feature steps; tests read as user steps.

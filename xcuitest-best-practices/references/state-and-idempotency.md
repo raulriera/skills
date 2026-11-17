@@ -40,6 +40,16 @@ Rules for the reset hook:
 - Throw on a reset error. A partial reset gives a wrong start state that is hard to diagnose.
 - Clear every store that holds user data, including caches that restore a screen or a tab.
 
+## Turn off animations
+
+Every push, sheet, and changing value animates, and each step waits for the motion to end. A
+second Debug simulator launch flag turns animations off for the whole launch.
+
+- UIKit: call `UIView.setAnimationsEnabled(false)` at launch, such as in the app delegate.
+- SwiftUI: at each window's root, apply `.transaction { $0.animation = nil; $0.disablesAnimations = true }`.
+- Set the flag in the driver's launch environment, so relaunches keep it.
+- UI tests then don't cover motion. Check animations by hand.
+
 ## Start in a prepared state
 
 Most tests need a signed-in account, not the sign-in flow. If every test drives the sign-in
