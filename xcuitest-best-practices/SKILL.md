@@ -36,10 +36,13 @@ this skill.
 7. A timed-out wait throws and ends the test. Do not continue with dependent steps.
 8. Do not retry committed actions (create, save, send, pay) and do not dismiss alerts automatically.
    An unexpected alert fails the test at once.
-9. Put screen knowledge in page objects. Tests read as a list of user steps and outcomes.
-10. Use only standard XCUITest APIs in test code: no `Process`, `xcrun simctl`, or host file access.
-11. Never type, log, or attach real credentials or personal data. UI test logs record typed text.
-12. If the project says only a person runs UI tests, build them but do not run them, and say
+9. Give the app one driver and each feature one page object. The driver knows no feature's
+   screens, and a page holds only its own feature's steps. Tests read as user steps and outcomes.
+10. Start a test that only needs a signed-in account in a prepared state, set by a Debug simulator
+    launch flag, never a deep link. Keep one test that drives the real sign-in flow.
+11. Use only standard XCUITest APIs in test code: no `Process`, `xcrun simctl`, or host file access.
+12. Never type, log, or attach real credentials or personal data. UI test logs record typed text.
+13. If the project says only a person runs UI tests, build them but do not run them, and say
     clearly that a build is not a run.
 
 ## First 60 seconds (triage)
@@ -59,9 +62,9 @@ this skill.
 
 ## Routing map
 
-- Reset hooks, launch and relaunch, remote state, fixtures → `references/state-and-idempotency.md`
+- Reset hooks, prepared start states, launch and relaunch, remote state, fixtures → `references/state-and-idempotency.md`
 - Readiness predicates, scrolling, moving content, gestures → `references/waiting-and-interaction.md`
-- Page objects, the shared app driver, test layout and naming → `references/page-objects.md`
+- The shared app driver, one page per feature, test layout and naming → `references/page-objects.md`
 - SpringBoard alerts, permission resets, share sheets, backgrounding, URLs → `references/system-ui.md`
 - Local and Xcode Cloud configuration, secrets, test plans → `references/ci-and-xcode-cloud.md`
 - Simulator clones, result bundles, regression tests → `references/diagnosing-failures.md`
@@ -81,6 +84,8 @@ this skill.
 | Tap lands on the wrong row | Content moved after the scroll | Swipe slowly, then wait for a stable frame |
 | Two buttons share one label | A sheet covers the screen behind it | Scope by container, or take the hittable match |
 | Passes locally, fails on CI | Host command or a missing secret | Standard APIs only; supply secrets through CI configuration |
+| One broken sign-in screen fails every test | Each test drives sign-in | Launch in a prepared state; keep one sign-in test |
+| A feature's steps live on the driver or another page | No page for that feature | Add the feature's page and move the steps there |
 
 ## Verification checklist
 
@@ -92,7 +97,8 @@ this skill.
 - Relaunches that check persistence omit the reset flag.
 - Remote state that a test creates is unique to the run or removed by the test.
 - Test code uses no `Process`, `simctl`, or host paths; secrets come from configuration.
-- Page objects own queries; tests read as user steps.
+- One page per feature owns its queries; the driver holds no feature steps; tests read as user steps.
+- Tests that only need a signed-in account start from the prepared-state flag; one test drives the real sign-in.
 
 ## References
 
