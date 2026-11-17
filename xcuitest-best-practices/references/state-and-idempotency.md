@@ -40,6 +40,22 @@ Rules for the reset hook:
 - Throw on a reset error. A partial reset gives a wrong start state that is hard to diagnose.
 - Clear every store that holds user data, including caches that restore a screen or a tab.
 
+## Start in a prepared state
+
+Most tests need a signed-in account, not the sign-in flow. If every test drives the sign-in
+screens, the suite is slow, and one broken sign-in screen fails every test.
+
+- Add a second launch flag that prepares the start state, such as a signed-in test account.
+- Compile it with the reset hook, only in `DEBUG && targetEnvironment(simulator)`, and run it after
+  the reset.
+- Prepare the state through the same production code that the flow uses, such as the sign-in or
+  import service, so the test still covers the real storage.
+- Pass a public fixture or the name of a dedicated test account in `launchEnvironment`, never a
+  secret.
+- Keep one test that drives the real flow.
+- Use a launch flag, not a deep link. A URL scheme ships in every build, and any app or web page
+  can open it.
+
 ## Relaunch to check persistence
 
 Set the flag for the first launch only, then remove it. A later `relaunch()` must run the real
